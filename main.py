@@ -3,7 +3,7 @@ import random
 qua_size = 3  # Количество переменных
 max_operations = 4
 
-task = []
+all_of_task = []  # История соданных логических выражений
 
 
 """ def transformation(task: str, separator=' ') -> str:
@@ -56,13 +56,12 @@ def matrix_calculation(size: int) -> tuple:
         matrix[i][1] = True
         matrix[i + 1][1] = True
 
-
     return matrix, matrix_height, matrix_width
-
 
 
 def solution() -> list:
     """ Решение матрицы """
+
     matrix, height, width = matrix_calculation(qua_size)
     task = generation(max_operations)
 
@@ -79,26 +78,30 @@ def solution() -> list:
 
 
 def show_matrix():
-    """Решение и вывод матрицы на экран"""
+    """Вывод матрицы на экран"""
+
     matrix = solution()
     for row in matrix:
         for element in row:
             print(element, end=' ')
         print()
 
+    return matrix
 
 
-def generation(max_operation: int) -> list:
-    operation = 0
-    exam_a = 0
-    exam_b = 0
-    exam_c = 0
+
+def generation(max_operation: int) -> str:
+    """ Генерирует логическое выражение и возвращает его в виде списка """
+
+    operation = exam_a = exam_b = exam_c = 0
 
     task_original11 = []
     oper_and_var = ['a', 'b', 'c', 'not']
     vari = ['a', 'b', 'c']
     oper = ['or', 'and']
     not_and_var = ['not', 'a', 'b', 'c']
+
+    ''' Генерация выражения '''
     while operation < max_operation:
         if task_original11 == []:
             task_original11.append(random.choice(oper_and_var))
@@ -119,7 +122,6 @@ def generation(max_operation: int) -> list:
             exam_c += 1
 
 
-
     if exam_a == 0:
         task_original11.append('a')
     elif exam_b == 0:
@@ -130,26 +132,45 @@ def generation(max_operation: int) -> list:
         task_original11.append(random.choice(vari))
 
     task_original11 = ' '.join(task_original11)  # Конечный вариант строки, которая обрабатывается интерпритатором
+    all_of_task.append(task_original11)
 
     
     return task_original11
 
 
 
+
 def examination():
     """ Создает матрицу, с которой будет работать пользователь """
+    #task = all_of_task[-1]
+    exam_matrix, matrix_height, matrix_width = matrix_calculation(qua_size)
 
-    exam_matrix, height, width = matrix_calculation(qua_size)
-    print(exam_matrix)
 
 
+    print('Введите по порядку значения')
+    for string in range(2 ** qua_size):
+        exam_matrix[string][3] = input()
+
+    return exam_matrix
+
+
+def check_results():
+    """ ПРОВЕРИТЬ """
+    """ Проверка 2 матриц """
+
+    computer_matrix = show_matrix()
+    person_matrix = examination()
+
+
+    for cl in range(2 ** qua_size):
+        if str(computer_matrix[cl][-1]) != person_matrix[cl][-1]:
+            print(f"Вы сделали ошибку в {cl+1} строке")
 
 
 def main():
     """ Основная функция программы """
-    show_matrix()
 
-
+    check_results()
 
 
 main()
