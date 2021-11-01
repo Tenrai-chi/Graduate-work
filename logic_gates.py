@@ -29,14 +29,29 @@ im_a = ImageTk.PhotoImage(Image.open('image/a.png'))
 im_b = ImageTk.PhotoImage(Image.open('image/b.png'))
 im_c = ImageTk.PhotoImage(Image.open('image/c.png'))
 
-im_not = ImageTk.PhotoImage(Image.open('image/not.png'))
+
+# Буквенное
+
+'''im_not = ImageTk.PhotoImage(Image.open('image/not.png'))
 im_buf = ImageTk.PhotoImage(Image.open('image/buf.png'))
 im_and = ImageTk.PhotoImage(Image.open('image/and.png'))
 im_nand = ImageTk.PhotoImage(Image.open('image/nand.png'))
 im_nor = ImageTk.PhotoImage(Image.open('image/nor.png'))
 im_xnor = ImageTk.PhotoImage(Image.open('image/xnor.png'))
 im_xor = ImageTk.PhotoImage(Image.open('image/xor.png'))
-im_or = ImageTk.PhotoImage(Image.open('image/or.png'))
+im_or = ImageTk.PhotoImage(Image.open('image/or.png'))'''
+
+# Символьное
+
+im_not = ImageTk.PhotoImage(Image.open('image/new/not.png'))
+im_buf = ImageTk.PhotoImage(Image.open('image/new/buf.png'))
+im_and = ImageTk.PhotoImage(Image.open('image/new/and.png'))
+im_nand = ImageTk.PhotoImage(Image.open('image/new/nand.png'))
+im_nor = ImageTk.PhotoImage(Image.open('image/new/nor.png'))
+im_xnor = ImageTk.PhotoImage(Image.open('image/new/xnor.png'))
+im_xor = ImageTk.PhotoImage(Image.open('image/new/xor.png'))
+im_or = ImageTk.PhotoImage(Image.open('image/new/or.png'))
+
 
 im_1 = ImageTk.PhotoImage(Image.open('image/1.png'))
 im_2 = ImageTk.PhotoImage(Image.open('image/2.png'))
@@ -827,7 +842,7 @@ def circuit_8():
     choice_from_gates_2(elements[1], 2, 2)
     Label(root, image=im_10).grid(row=2, column=3)
     Label(root, image=im_3).grid(row=2, column=5)
-    choice_from_gates_1(elements[5], 2, 6)
+    choice_from_gates_2(elements[5], 2, 6)
     Label(root, image=im_1).grid(row=2, column=7)
     choice_from_0_1(y, 2, 8)
 
@@ -865,6 +880,7 @@ def main():
     else:
         circuit_8()
 
+    #circuit_8()
 
 main()
 root.mainloop()
