@@ -29,46 +29,9 @@ im_a = ImageTk.PhotoImage(Image.open('image/input/a.png'))
 im_b = ImageTk.PhotoImage(Image.open('image/input/b.png'))
 im_c = ImageTk.PhotoImage(Image.open('image/input/c.png'))
 
-
-# Логические обозначения
-'''
-im_not = ImageTk.PhotoImage(Image.open('image/letter/not.png'))
-im_buf = ImageTk.PhotoImage(Image.open('image/letter/buf.png'))
-im_and = ImageTk.PhotoImage(Image.open('image/letter/and.png'))
-im_nand = ImageTk.PhotoImage(Image.open('image/letter/nand.png'))
-im_nor = ImageTk.PhotoImage(Image.open('image/letter/nor.png'))
-im_xnor = ImageTk.PhotoImage(Image.open('image/letter/xnor.png'))
-im_xor = ImageTk.PhotoImage(Image.open('image/letter/xor.png'))
-im_or = ImageTk.PhotoImage(Image.open('image/letter/or.png'))
-'''
-
-# ANSI
-'''
-im_not = ImageTk.PhotoImage(Image.open('image/ansi/not.png'))
-im_buf = ImageTk.PhotoImage(Image.open('image/ansi/buf.png'))
-im_and = ImageTk.PhotoImage(Image.open('image/ansi/and.png'))
-im_nand = ImageTk.PhotoImage(Image.open('image/ansi/nand.png'))
-im_nor = ImageTk.PhotoImage(Image.open('image/ansi/nor.png'))
-im_xnor = ImageTk.PhotoImage(Image.open('image/ansi/xnor.png'))
-im_xor = ImageTk.PhotoImage(Image.open('image/ansi/xor.png'))
-im_or = ImageTk.PhotoImage(Image.open('image/ansi/or.png'))
-'''
-
-# ГОСТ IEC
-'''
-im_not = ImageTk.PhotoImage(Image.open('image/iec/not.png'))
-im_buf = ImageTk.PhotoImage(Image.open('image/iec/buf.png'))
-im_and = ImageTk.PhotoImage(Image.open('image/iec/and.png'))
-im_nand = ImageTk.PhotoImage(Image.open('image/iec/nand.png'))
-im_nor = ImageTk.PhotoImage(Image.open('image/iec/nor.png'))
-im_xnor = ImageTk.PhotoImage(Image.open('image/iec/xnor.png'))
-im_xor = ImageTk.PhotoImage(Image.open('image/iec/xor.png'))
-im_or = ImageTk.PhotoImage(Image.open('image/iec/or.png'))
-'''
-
 """ Запись картинок в словари стилей """
 gates_styles = {
-    "ansi": {
+    "ansi": {  # ANSI
         "im_not": ImageTk.PhotoImage(Image.open('image/ansi/not.png')),
         "im_buf": ImageTk.PhotoImage(Image.open('image/ansi/buf.png')),
         "im_and": ImageTk.PhotoImage(Image.open('image/ansi/and.png')),
@@ -78,7 +41,7 @@ gates_styles = {
         "im_xor": ImageTk.PhotoImage(Image.open('image/ansi/xor.png')),
         "im_or": ImageTk.PhotoImage(Image.open('image/ansi/or.png'))
     },
-    "iec": {
+    "iec": {  # ГОСТ
         "im_not": ImageTk.PhotoImage(Image.open('image/iec/not.png')),
         "im_buf": ImageTk.PhotoImage(Image.open('image/iec/buf.png')),
         "im_and": ImageTk.PhotoImage(Image.open('image/iec/and.png')),
@@ -88,7 +51,7 @@ gates_styles = {
         "im_xor": ImageTk.PhotoImage(Image.open('image/iec/xor.png')),
         "im_or": ImageTk.PhotoImage(Image.open('image/iec/or.png'))
     },
-    "log": {
+    "log": {  #  Логические обозначения
         "im_not": ImageTk.PhotoImage(Image.open('image/letter/not.png')),
         "im_buf": ImageTk.PhotoImage(Image.open('image/letter/buf.png')),
         "im_and": ImageTk.PhotoImage(Image.open('image/letter/and.png')),
