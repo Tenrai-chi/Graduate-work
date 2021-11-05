@@ -22,50 +22,99 @@ root.geometry('1500x1200')  # Размер окна
 
 
 # Подгрузка и преобразование изображений
-im_true = ImageTk.PhotoImage(Image.open('image/true.png'))
-im_false = ImageTk.PhotoImage(Image.open('image/false.png'))
-im_answer = ImageTk.PhotoImage(Image.open('image/y.png'))
-im_a = ImageTk.PhotoImage(Image.open('image/a.png'))
-im_b = ImageTk.PhotoImage(Image.open('image/b.png'))
-im_c = ImageTk.PhotoImage(Image.open('image/c.png'))
+im_true = ImageTk.PhotoImage(Image.open('image/input/true.png'))
+im_false = ImageTk.PhotoImage(Image.open('image/input/false.png'))
+im_answer = ImageTk.PhotoImage(Image.open('image/input/y.png'))
+im_a = ImageTk.PhotoImage(Image.open('image/input/a.png'))
+im_b = ImageTk.PhotoImage(Image.open('image/input/b.png'))
+im_c = ImageTk.PhotoImage(Image.open('image/input/c.png'))
 
 
-# Буквенное
+# Логические обозначения
+'''
+im_not = ImageTk.PhotoImage(Image.open('image/letter/not.png'))
+im_buf = ImageTk.PhotoImage(Image.open('image/letter/buf.png'))
+im_and = ImageTk.PhotoImage(Image.open('image/letter/and.png'))
+im_nand = ImageTk.PhotoImage(Image.open('image/letter/nand.png'))
+im_nor = ImageTk.PhotoImage(Image.open('image/letter/nor.png'))
+im_xnor = ImageTk.PhotoImage(Image.open('image/letter/xnor.png'))
+im_xor = ImageTk.PhotoImage(Image.open('image/letter/xor.png'))
+im_or = ImageTk.PhotoImage(Image.open('image/letter/or.png'))
+'''
 
-'''im_not = ImageTk.PhotoImage(Image.open('image/not.png'))
-im_buf = ImageTk.PhotoImage(Image.open('image/buf.png'))
-im_and = ImageTk.PhotoImage(Image.open('image/and.png'))
-im_nand = ImageTk.PhotoImage(Image.open('image/nand.png'))
-im_nor = ImageTk.PhotoImage(Image.open('image/nor.png'))
-im_xnor = ImageTk.PhotoImage(Image.open('image/xnor.png'))
-im_xor = ImageTk.PhotoImage(Image.open('image/xor.png'))
-im_or = ImageTk.PhotoImage(Image.open('image/or.png'))'''
+# ANSI
+'''
+im_not = ImageTk.PhotoImage(Image.open('image/ansi/not.png'))
+im_buf = ImageTk.PhotoImage(Image.open('image/ansi/buf.png'))
+im_and = ImageTk.PhotoImage(Image.open('image/ansi/and.png'))
+im_nand = ImageTk.PhotoImage(Image.open('image/ansi/nand.png'))
+im_nor = ImageTk.PhotoImage(Image.open('image/ansi/nor.png'))
+im_xnor = ImageTk.PhotoImage(Image.open('image/ansi/xnor.png'))
+im_xor = ImageTk.PhotoImage(Image.open('image/ansi/xor.png'))
+im_or = ImageTk.PhotoImage(Image.open('image/ansi/or.png'))
+'''
 
-# Символьное
+# ГОСТ IEC
+'''
+im_not = ImageTk.PhotoImage(Image.open('image/iec/not.png'))
+im_buf = ImageTk.PhotoImage(Image.open('image/iec/buf.png'))
+im_and = ImageTk.PhotoImage(Image.open('image/iec/and.png'))
+im_nand = ImageTk.PhotoImage(Image.open('image/iec/nand.png'))
+im_nor = ImageTk.PhotoImage(Image.open('image/iec/nor.png'))
+im_xnor = ImageTk.PhotoImage(Image.open('image/iec/xnor.png'))
+im_xor = ImageTk.PhotoImage(Image.open('image/iec/xor.png'))
+im_or = ImageTk.PhotoImage(Image.open('image/iec/or.png'))
+'''
 
-im_not = ImageTk.PhotoImage(Image.open('image/new/not.png'))
-im_buf = ImageTk.PhotoImage(Image.open('image/new/buf.png'))
-im_and = ImageTk.PhotoImage(Image.open('image/new/and.png'))
-im_nand = ImageTk.PhotoImage(Image.open('image/new/nand.png'))
-im_nor = ImageTk.PhotoImage(Image.open('image/new/nor.png'))
-im_xnor = ImageTk.PhotoImage(Image.open('image/new/xnor.png'))
-im_xor = ImageTk.PhotoImage(Image.open('image/new/xor.png'))
-im_or = ImageTk.PhotoImage(Image.open('image/new/or.png'))
+""" Запись картинок в словари стилей """
+gates_styles = {
+    "ansi": {
+        "im_not": ImageTk.PhotoImage(Image.open('image/ansi/not.png')),
+        "im_buf": ImageTk.PhotoImage(Image.open('image/ansi/buf.png')),
+        "im_and": ImageTk.PhotoImage(Image.open('image/ansi/and.png')),
+        "im_nand": ImageTk.PhotoImage(Image.open('image/ansi/nand.png')),
+        "im_nor": ImageTk.PhotoImage(Image.open('image/ansi/nor.png')),
+        "im_xnor": ImageTk.PhotoImage(Image.open('image/ansi/xnor.png')),
+        "im_xor": ImageTk.PhotoImage(Image.open('image/ansi/xor.png')),
+        "im_or": ImageTk.PhotoImage(Image.open('image/ansi/or.png'))
+    },
+    "iec": {
+        "im_not": ImageTk.PhotoImage(Image.open('image/iec/not.png')),
+        "im_buf": ImageTk.PhotoImage(Image.open('image/iec/buf.png')),
+        "im_and": ImageTk.PhotoImage(Image.open('image/iec/and.png')),
+        "im_nand": ImageTk.PhotoImage(Image.open('image/iec/nand.png')),
+        "im_nor": ImageTk.PhotoImage(Image.open('image/iec/nor.png')),
+        "im_xnor": ImageTk.PhotoImage(Image.open('image/iec/xnor.png')),
+        "im_xor": ImageTk.PhotoImage(Image.open('image/iec/xor.png')),
+        "im_or": ImageTk.PhotoImage(Image.open('image/iec/or.png'))
+    },
+    "log": {
+        "im_not": ImageTk.PhotoImage(Image.open('image/letter/not.png')),
+        "im_buf": ImageTk.PhotoImage(Image.open('image/letter/buf.png')),
+        "im_and": ImageTk.PhotoImage(Image.open('image/letter/and.png')),
+        "im_nand": ImageTk.PhotoImage(Image.open('image/letter/nand.png')),
+        "im_nor": ImageTk.PhotoImage(Image.open('image/letter/nor.png')),
+        "im_xnor": ImageTk.PhotoImage(Image.open('image/letter/xnor.png')),
+        "im_xor": ImageTk.PhotoImage(Image.open('image/letter/xor.png')),
+        "im_or": ImageTk.PhotoImage(Image.open('image/letter/or.png'))
+    }
+}
+style = "ansi"
 
 
-im_1 = ImageTk.PhotoImage(Image.open('image/1.png'))
-im_2 = ImageTk.PhotoImage(Image.open('image/2.png'))
-im_3 = ImageTk.PhotoImage(Image.open('image/3.png'))
-im_4 = ImageTk.PhotoImage(Image.open('image/4.png'))
-im_5 = ImageTk.PhotoImage(Image.open('image/5.png'))
-im_6 = ImageTk.PhotoImage(Image.open('image/6.png'))
-im_7 = ImageTk.PhotoImage(Image.open('image/7.png'))
-im_8 = ImageTk.PhotoImage(Image.open('image/8.png'))
-im_9 = ImageTk.PhotoImage(Image.open('image/9.png'))
-im_10 = ImageTk.PhotoImage(Image.open('image/10.png'))
-im_11 = ImageTk.PhotoImage(Image.open('image/11.png'))
-im_12 = ImageTk.PhotoImage(Image.open('image/12.png'))
-im_13 = ImageTk.PhotoImage(Image.open('image/13.png'))
+im_1 = ImageTk.PhotoImage(Image.open('image/line/1.png'))
+im_2 = ImageTk.PhotoImage(Image.open('image/line/2.png'))
+im_3 = ImageTk.PhotoImage(Image.open('image/line/3.png'))
+im_4 = ImageTk.PhotoImage(Image.open('image/line/4.png'))
+im_5 = ImageTk.PhotoImage(Image.open('image/line/5.png'))
+im_6 = ImageTk.PhotoImage(Image.open('image/line/6.png'))
+im_7 = ImageTk.PhotoImage(Image.open('image/line/7.png'))
+im_8 = ImageTk.PhotoImage(Image.open('image/line/8.png'))
+im_9 = ImageTk.PhotoImage(Image.open('image/line/9.png'))
+im_10 = ImageTk.PhotoImage(Image.open('image/line/10.png'))
+im_11 = ImageTk.PhotoImage(Image.open('image/line/11.png'))
+im_12 = ImageTk.PhotoImage(Image.open('image/line/12.png'))
+im_13 = ImageTk.PhotoImage(Image.open('image/line/13.png'))
 
 
 def log_NOT(a: bool) -> bool:
@@ -103,7 +152,7 @@ def log_OR(a, b: bool) -> bool:
 def log_XOR(a, b: bool) -> bool:
     """ Вентиль ИСКЛЮЧАЮЩЕЕ ИЛИ
         Возвращает истину, если один из входящих значений истино, а другой ложно """
-    if a == True and b == False or a == False and b == True:
+    if a and not b or not a and b:
         y = True
     else:
         y = False
@@ -115,7 +164,7 @@ def log_NAND(a, b: bool) -> bool:
     """ Вентиль И-НЕ
         Возвращает истиннцу, если хотя бы один из входящих значений ложно
         Инвертирует значения вентиля И """
-    if a == False or b == False:
+    if not a or not b:
         y = True
     else:
         y = False
@@ -127,7 +176,7 @@ def log_NOR(a, b: bool) -> bool:
     """ Вентиль ИЛИ-НЕ
         Возвращает истиннцу, если оба входящих значения ложны
         Инвертирует значения вентиля ИЛИ """
-    if a == False and b == False:
+    if not a and not b:
         y = True
     else:
         y = False
@@ -138,7 +187,7 @@ def log_NOR(a, b: bool) -> bool:
 def log_XNOR(a, b: bool) -> bool:
     """ Вентиль ИСКЛЮЧАЮЩЕЕ ИЛИ_НЕ
      Возвращает истину, если входящие значения равно между собой """
-    if a == True and b == True or a == False and b == False:
+    if a and b or not a and not b:
         y = True
     else:
         y = False
@@ -149,7 +198,7 @@ def log_XNOR(a, b: bool) -> bool:
 def log_NOR3(a, b, c: bool) -> bool:
     """ Вентиль ИЛИ-НЕ с 3 входами
         Возвращает истину, только если все входящие значения ложны"""
-    if a == False and b == False and c == False:
+    if not a and not b and not c:
         y = True
     else:
         y = False
@@ -479,26 +528,26 @@ def choice_from_gates_1(element: str, index_1: int, index_2: int):
     """ Определяет какой элемент отрисовывать при 1 входном сигнале """
 
     if element == 'buf':
-        Label(root, image=im_buf).grid(row=index_1, column=index_2)
+        Label(root, image=gates_styles[style]["im_buf"]).grid(row=index_1, column=index_2)
     else:
-        Label(root, image=im_not).grid(row=index_1, column=index_2)
+        Label(root, image=gates_styles[style]["im_not"]).grid(row=index_1, column=index_2)
 
 
 def choice_from_gates_2(element: str, index_1: int, index_2: int):
     """ Определяет какой элемент отрисовывать при двух входных сигналах """
 
     if element == 'and':
-        Label(root, image=im_and).grid(row=index_1, column=index_2)
+        Label(root, image=gates_styles[style]["im_and"]).grid(row=index_1, column=index_2)
     elif element == 'or':
-        Label(root, image=im_or).grid(row=index_1, column=index_2)
+        Label(root, image=gates_styles[style]["im_or"]).grid(row=index_1, column=index_2)
     elif element == 'xor':
-        Label(root, image=im_xor).grid(row=index_1, column=index_2)
+        Label(root, image=gates_styles[style]["im_xor"]).grid(row=index_1, column=index_2)
     elif element == 'nand':
-        Label(root, image=im_nand).grid(row=index_1, column=index_2)
+        Label(root, image=gates_styles[style]["im_nand"]).grid(row=index_1, column=index_2)
     elif element == 'nor':
-        Label(root, image=im_nor).grid(row=index_1, column=index_2)
+        Label(root, image=gates_styles[style]["im_nor"]).grid(row=index_1, column=index_2)
     else:
-        Label(root, image=im_xnor).grid(row=index_1, column=index_2)
+        Label(root, image=gates_styles[style]["im_xnor"]).grid(row=index_1, column=index_2)
 
 
 def choice_from_0_1(vari: bool, index_1: int, index_2: int):
@@ -535,7 +584,6 @@ def circuit_1():
     choice_from_0_1(b, 2, 0)
     Label(root, image=im_4).grid(row=2, column=1)
     choice_from_gates_1(elements[1], 2, 2)
-    Label(root, image=im_buf).grid(row=2, column=2)
     Label(root, image=im_5).grid(row=2, column=3)
     Label(root, image=im_3).grid(row=2, column=5)
     choice_from_gates_2(elements[4], 2, 6)
@@ -551,7 +599,6 @@ def circuit_1():
     # 5 строка
     Label(root, image=im_3).grid(row=4, column=3)
     choice_from_gates_2(elements[3], 4, 4)
-    Label(root, image=im_xnor).grid(row=4, column=4)
     Label(root, image=im_5).grid(row=4, column=5)
 
     # 6 строка
@@ -572,7 +619,7 @@ def circuit_2():
     y = elements_in_circuit[4]
 
     # 1 строка
-    choice_from_0_1 (a, 0, 0)
+    choice_from_0_1(a, 0, 0)
     Label(root, image=im_1).grid(row=0, column=1)
     Label(root, image=im_2).grid(row=0, column=2)
 
@@ -669,7 +716,6 @@ def circuit_4():
     Label(root, image=im_5).grid(row=2, column=5)
     Label(root, image=im_3).grid(row=2, column=7)
     choice_from_gates_2(elements[4], 2, 8)
-    Label(root, image=im_xor).grid(row=2, column=8)
     Label(root, image=im_1).grid(row=2, column=9)
     choice_from_0_1(y, 2, 10)
 
@@ -865,7 +911,7 @@ def main():
     pattern = random.randint(1, 8)
     if pattern == 1:
         circuit_1()
-    elif pattern ==2:
+    elif pattern == 2:
         circuit_2()
     elif pattern == 3:
         circuit_3()
@@ -881,6 +927,7 @@ def main():
         circuit_8()
 
     #circuit_8()
+
 
 main()
 root.mainloop()
