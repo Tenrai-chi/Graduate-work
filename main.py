@@ -31,10 +31,11 @@ frame_button = Frame(root)  # Фрейм с кнопками
 frame_button.grid(column=0, row=0, sticky="nw")
 #frame_notation = Frame(root)  # Фрейм с нотацией
 #frame_notation.grid(column=0, row=1, sticky="nw", rowspan=2)
-frame_gates = Frame(root)  # Фрейм с схемой relief=RIDGE borderwidth=10 width=700, height=660
+frame_gates = Frame(root, width=1300, height=1000)  # Фрейм с схемой relief=RIDGE borderwidth=10 width=700,
+# height=660
 frame_gates.grid(column=1, row=1, sticky="nw", padx=20, pady=20)
 frame_task = Frame(root)  # Фрейм с заданием
-frame_task.grid(column=1, row=2, sticky="nw")
+frame_task.grid(column=1, row=2, sticky="sw")
 
 # Подгрузка и преобразование изображений в словарь
 image_of_gates = {
@@ -924,12 +925,17 @@ def task_1():
     for widget in frame_task.winfo_children():
         widget.destroy()
 
+    global temporary_data
+    global temporary_index
+    temporary_data = []
+    temporary_index = []
+
     #for widget in frame_task.grid_slaves():
         #widget.destroy()
 
     Label(frame_task,
           text='Какой логический сигнал появится на выходе схемы после подачи заданных вдохящих значений?',
-          font="Arial 15").grid(row=0, column=0, sticky="nw", padx=20, pady=20)
+          font="Arial 15").grid(row=0, column=0, sticky="sw", padx=20, pady=20)
 
 
     pattern = random.randint(1, 8)
@@ -950,11 +956,12 @@ def task_1():
     else:
         circuit_8()
 
+    #circuit_8()
 
     button = Button(frame_task, text="True", font="Arial 15", command=answer_user_true, width=8)  # relief="flat" для более стильного дизайна
-    button.grid(column=0, row=1, sticky="w", padx=20, pady=10)
+    button.grid(column=0, row=1, sticky="ws", padx=20, pady=10)
     button = Button(frame_task, text="False", font="Arial 15", command=answer_user_false, width=8)
-    button.grid(column=0, row=2, sticky="nw", padx=20, pady=10)
+    button.grid(column=0, row=2, sticky="sw", padx=20, pady=10)
 
 
 def answer_user_true():
