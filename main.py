@@ -28,19 +28,19 @@ notation_menu = Menu(main_menu, tearoff=0)
 
 # Создание фреймов
 frame_button = Frame(root)  # Фрейм с кнопками
-frame_button.grid(column=0, row=0, sticky="nw")
-#frame_notation = Frame(root)  # Фрейм с нотацией
-#frame_notation.grid(column=0, row=1, sticky="nw", rowspan=2)
-frame_gates = Frame(root, width=1300, height=1000)  # Фрейм с схемой relief=RIDGE borderwidth=10 width=700,
-# height=660
+frame_button.grid(column=0, row=0, sticky="nw", columnspan=2)
+frame_gates = Frame(root)  # Фрейм с схемой relief=RIDGE borderwidth=10 width=700, # height=660
 frame_gates.grid(column=1, row=1, sticky="nw", padx=20, pady=20)
 frame_task = Frame(root)  # Фрейм с заданием
 frame_task.grid(column=1, row=2, sticky="sw")
+frame_empty = Frame(root, width=50, height=850)  # Пустой фрейм, чтобы фрейм с заданием не скакал по экрану
+frame_empty.grid(column=0, row=1, rowspan=2, sticky="w")
 
 # Подгрузка и преобразование изображений в словарь
 image_of_gates = {
     "im_true": ImageTk.PhotoImage(Image.open('image/input/true.png')),
     "im_false": ImageTk.PhotoImage(Image.open('image/input/false.png')),
+    "im_question": ImageTk.PhotoImage(Image.open('image/input/qest.png')),
     "im_a": ImageTk.PhotoImage(Image.open('image/input/a.png')),
     "im_b": ImageTk.PhotoImage(Image.open('image/input/b.png')),
     "im_c": ImageTk.PhotoImage(Image.open('image/input/c.png')),
@@ -96,7 +96,7 @@ gates_styles = {
 
 style = "ansi"  # Метка используемого вида обозначений
 temporary_data = []  # Хранилище временных данных: [str], bool*4
-temporary_index = []
+temporary_index = []  # Хранение координат
 type_of_task = "task_1"  # Метка задания
 
 
@@ -459,7 +459,6 @@ def circuit_1():
 
     elements_in_circuit = pattern_1()
     global temporary_data
-    temporary_data = elements_in_circuit  # Подгрузка во временное хранилище
 
     elements = elements_in_circuit[0]  # Элементы схемы
     a = elements_in_circuit[1]
@@ -467,8 +466,26 @@ def circuit_1():
     c = elements_in_circuit[3]
     y = elements_in_circuit[4]
 
+    if type_of_task == "task_1":
+        temporary_data.append(y)
+    elif type_of_task == "task_2":
+        if temporary_data[0] == 1:
+            temporary_data.append(a)
+        elif temporary_data[0] == 2:
+            temporary_data.append(b)
+        else:
+            temporary_data.append(c)
+    else:
+        print('Error')
+
     # 1 строка
-    choice_from_0_1(a, 1, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 1:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=1, column=0)
+        temporary_index.append(1)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(a, 1, 0)
+
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=1)
     choice_from_gates_1(elements[0], 1, 2)
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=3)
@@ -479,19 +496,26 @@ def circuit_1():
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=2, column=5)
 
     # 3 строка
-    choice_from_0_1(b, 3, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 2:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=3, column=0)
+        temporary_index.append(3)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(b, 3, 0)
+
     Label(frame_gates, image=image_of_gates["im_4"]).grid(row=3, column=1)
     choice_from_gates_1(elements[1], 3, 2)
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=3)
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=3, column=5)
     choice_from_gates_2(elements[4], 3, 6)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=7)
+
     if type_of_task == "task_1":
         Label(frame_gates, image=image_of_gates["im_y"]).grid(row=3, column=8)
+        temporary_index.append(3)
+        temporary_index.append(8)
     else:
         choice_from_0_1(y, 3, 8)
-    temporary_index.append(3)
-    temporary_index.append(8)
 
     # 4 строка
     Label(frame_gates, image=image_of_gates["im_12"]).grid(row=4, column=1)
@@ -505,7 +529,13 @@ def circuit_1():
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=5, column=5)
 
     # 6 строка
-    choice_from_0_1(c, 6, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 3:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=6, column=0)
+        temporary_index.append(6)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(c, 6, 0)
+
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=6, column=1)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=6, column=2)
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=6, column=3)
@@ -516,7 +546,6 @@ def circuit_2():
 
     elements_in_circuit = pattern_2()
     global temporary_data
-    temporary_data = elements_in_circuit  # Подгрузка во временное хранилище
 
     elements = elements_in_circuit[0]  # Элементы схемы
     a = elements_in_circuit[1]
@@ -524,8 +553,26 @@ def circuit_2():
     c = elements_in_circuit[3]
     y = elements_in_circuit[4]
 
+    if type_of_task == "task_1":
+        temporary_data.append(y)
+    elif type_of_task == "task_2":
+        if temporary_data[0] == 1:
+            temporary_data.append(a)
+        elif temporary_data[0] == 2:
+            temporary_data.append(b)
+        else:
+            temporary_data.append(c)
+    else:
+        print('Error')
+
     # 1 строка
-    choice_from_0_1(a, 1, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 1:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=1, column=0)
+        temporary_index.append(1)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(a, 1, 0)
+
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=1)
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=2)
 
@@ -537,22 +584,33 @@ def circuit_2():
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=2, column=6)
 
     # 3 строка
-    choice_from_0_1(b, 3, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 2:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=3, column=0)
+        temporary_index.append(3)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(b, 3, 0)
+
     Label(frame_gates, image=image_of_gates["im_4"]).grid(row=3, column=1)
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=2)
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=3, column=6)
     choice_from_gates_2(elements[3], 3, 7)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=8)
-    #choice_from_0_1(y, 3, 9)
     if type_of_task == "task_1":
         Label(frame_gates, image=image_of_gates["im_y"]).grid(row=3, column=9)
+        temporary_index.append(3)
+        temporary_index.append(9)
     else:
         choice_from_0_1(y, 3, 9)
-    temporary_index.append(3)
-    temporary_index.append(9)
 
     # 4 строка
-    choice_from_0_1(c, 4, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 3:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=4, column=0)
+        temporary_index.append(4)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(c, 4, 0)
+
     Label(frame_gates, image=image_of_gates["im_6"]).grid(row=4, column=1)
     choice_from_gates_2(elements[3], 4, 2)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=3)
@@ -566,7 +624,6 @@ def circuit_3():
 
     elements_in_circuit = pattern_3()
     global temporary_data
-    temporary_data = elements_in_circuit  # Подгрузка во временное хранилище
 
     elements = elements_in_circuit[0]  # Элементы схемы
     a = elements_in_circuit[1]
@@ -574,8 +631,26 @@ def circuit_3():
     c = elements_in_circuit[3]
     y = elements_in_circuit[4]
 
+    if type_of_task == "task_1":
+        temporary_data.append(y)
+    elif type_of_task == "task_2":
+        if temporary_data[0] == 1:
+            temporary_data.append(a)
+        elif temporary_data[0] == 2:
+            temporary_data.append(b)
+        else:
+            temporary_data.append(c)
+    else:
+        print('Error')
+
     # 1 строка
-    choice_from_0_1(a, 1, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 1:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=1, column=0)
+        temporary_index.append(1)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(a, 1, 0)
+
     Label(frame_gates, image=image_of_gates["im_7"]).grid(row=1, column=1)
     choice_from_gates_2(elements[0], 1, 2)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=3)
@@ -583,21 +658,32 @@ def circuit_3():
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=5)
 
     # 2 строка
-    choice_from_0_1(b, 2, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 2:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=2, column=0)
+        temporary_index.append(2)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(b, 2, 0)
+
     Label(frame_gates, image=image_of_gates["im_10"]).grid(row=2, column=1)
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=5)
     choice_from_gates_2(elements[4], 2, 6)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=7)
-    #choice_from_0_1(y, 2, 8)
     if type_of_task == "task_1":
         Label(frame_gates, image=image_of_gates["im_y"]).grid(row=2, column=8)
+        temporary_index.append(2)
+        temporary_index.append(8)
     else:
         choice_from_0_1(y, 2, 8)
-    temporary_index.append(2)
-    temporary_index.append(8)
 
     # 3 строка
-    choice_from_0_1(c, 3, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 3:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=3, column=0)
+        temporary_index.append(3)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(c, 3, 0)
+
     Label(frame_gates, image=image_of_gates["im_6"]).grid(row=3, column=1)
     choice_from_gates_2(elements[1], 3, 2)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=3)
@@ -610,7 +696,6 @@ def circuit_4():
 
     elements_in_circuit = pattern_4()
     global temporary_data
-    temporary_data = elements_in_circuit  # Подгрузка во временное хранилище
 
     elements = elements_in_circuit[0]  # Элементы схемы
     a = elements_in_circuit[1]
@@ -618,8 +703,26 @@ def circuit_4():
     c = elements_in_circuit[3]
     y = elements_in_circuit[4]
 
+    if type_of_task == "task_1":
+        temporary_data.append(y)
+    elif type_of_task == "task_2":
+        if temporary_data[0] == 1:
+            temporary_data.append(a)
+        elif temporary_data[0] == 2:
+            temporary_data.append(b)
+        else:
+            temporary_data.append(c)
+    else:
+        print('Error')
+
     # 1 строка
-    choice_from_0_1(a, 1, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 1:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=1, column=0)
+        temporary_index.append(1)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(a, 1, 0)
+
     Label(frame_gates, image=image_of_gates["im_7"]).grid(row=1, column=1)
     choice_from_gates_2(elements[0], 1, 2)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=3)
@@ -634,23 +737,34 @@ def circuit_4():
 
     # 3 строка
     Label(frame_gates, image=image_of_gates["im_11"]).grid(row=3, column=1)
-    choice_from_0_1(c, 3, 2)
+    if type_of_task == "task_2" and temporary_data[0] == 3:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=3, column=2)
+        temporary_index.append(3)
+        temporary_index.append(2)
+    else:
+        choice_from_0_1(c, 3, 2)
+
     Label(frame_gates, image=image_of_gates["im_7"]).grid(row=3, column=3)
     choice_from_gates_2(elements[1], 3, 4)
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=5)
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=3, column=7)
     choice_from_gates_2(elements[4], 3, 8)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=9)
-    #choice_from_0_1(y, 3, 10)
     if type_of_task == "task_1":
         Label(frame_gates, image=image_of_gates["im_y"]).grid(row=3, column=10)
+        temporary_index.append(3)
+        temporary_index.append(10)
     else:
         choice_from_0_1(y, 3, 10)
-    temporary_index.append(3)
-    temporary_index.append(10)
 
     # 4 строка
-    choice_from_0_1(b, 4, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 2:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=4, column=0)
+        temporary_index.append(4)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(b, 4, 0)
+
     Label(frame_gates, image=image_of_gates["im_9"]).grid(row=4, column=1)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=2)
     Label(frame_gates, image=image_of_gates["im_9"]).grid(row=4, column=3)
@@ -665,7 +779,6 @@ def circuit_5():
 
     elements_in_circuit = pattern_5()
     global temporary_data
-    temporary_data = elements_in_circuit  # Подгрузка во временное хранилище
 
     elements = elements_in_circuit[0]  # Элементы схемы
     a = elements_in_circuit[1]
@@ -673,8 +786,26 @@ def circuit_5():
     c = elements_in_circuit[3]
     y = elements_in_circuit[4]
 
+    if type_of_task == "task_1":
+        temporary_data.append(y)
+    elif type_of_task == "task_2":
+        if temporary_data[0] == 1:
+            temporary_data.append(a)
+        elif temporary_data[0] == 2:
+            temporary_data.append(b)
+        else:
+            temporary_data.append(c)
+    else:
+        print('Error')
+
     # 1 строка
-    choice_from_0_1(a, 1, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 1:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=1, column=0)
+        temporary_index.append(1)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(a, 1, 0)
+
     Label(frame_gates, image=image_of_gates["im_7"]).grid(row=1, column=1)
     choice_from_gates_2(elements[0], 1, 2)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=3)
@@ -682,24 +813,34 @@ def circuit_5():
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=5)
 
     # 2 строка
-    choice_from_0_1(b, 2, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 2:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=2, column=0)
+        temporary_index.append(2)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(b, 2, 0)
+
     Label(frame_gates, image=image_of_gates["im_10"]).grid(row=2, column=1)
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=5)
     choice_from_gates_2(elements[3], 2, 6)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=7)
     choice_from_gates_1(elements[4], 2, 8)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=9)
-    #choice_from_0_1(y, 2, 10)
     if type_of_task == "task_1":
         Label(frame_gates, image=image_of_gates["im_y"]).grid(row=2, column=10)
+        temporary_index.append(2)
+        temporary_index.append(10)
     else:
         choice_from_0_1(y, 2, 10)
-    temporary_index.append(2)
-    temporary_index.append(10)
-
 
     # 3 строка
-    choice_from_0_1(c, 3, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 3:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=3, column=0)
+        temporary_index.append(3)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(c, 3, 0)
+
     Label(frame_gates, image=image_of_gates["im_6"]).grid(row=3, column=1)
     choice_from_gates_2(elements[1], 3, 2)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=3)
@@ -712,7 +853,6 @@ def circuit_6():
 
     elements_in_circuit = pattern_6()
     global temporary_data
-    temporary_data = elements_in_circuit  # Подгрузка во временное хранилище
 
     elements = elements_in_circuit[0]  # Элементы схемы
     a = elements_in_circuit[1]
@@ -720,8 +860,26 @@ def circuit_6():
     c = elements_in_circuit[3]
     y = elements_in_circuit[4]
 
+    if type_of_task == "task_1":
+        temporary_data.append(y)
+    elif type_of_task == "task_2":
+        if temporary_data[0] == 1:
+            temporary_data.append(a)
+        elif temporary_data[0] == 2:
+            temporary_data.append(b)
+        else:
+            temporary_data.append(c)
+    else:
+        print('Error')
+
     # 1 строка
-    choice_from_0_1(a, 1, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 1:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=1, column=0)
+        temporary_index.append(1)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(a, 1, 0)
+
     Label(frame_gates, image=image_of_gates["im_4"]).grid(row=1, column=1)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=2)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=3)
@@ -735,16 +893,22 @@ def circuit_6():
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=5)
     choice_from_gates_2(elements[3], 2, 6)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=7)
-    #choice_from_0_1(y, 2, 8)
     if type_of_task == "task_1":
         Label(frame_gates, image=image_of_gates["im_y"]).grid(row=2, column=8)
+        temporary_index.append(2)
+        temporary_index.append(8)
     else:
         choice_from_0_1(y, 2, 8)
-    temporary_index.append(2)
-    temporary_index.append(8)
 
     # 3 строка
     choice_from_0_1(b, 3, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 2:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=3, column=0)
+        temporary_index.append(3)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(b, 3, 0)
+
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=1)
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=3, column=3)
     choice_from_gates_2(elements[2], 3, 4)
@@ -752,6 +916,13 @@ def circuit_6():
 
     # 4 строка
     choice_from_0_1(c, 4, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 3:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=4, column=0)
+        temporary_index.append(4)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(c, 4, 0)
+
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=1)
     choice_from_gates_1(elements[1], 4, 2)
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=4, column=3)
@@ -762,13 +933,24 @@ def circuit_7():
 
     elements_in_circuit = pattern_7()
     global temporary_data
-    temporary_data = elements_in_circuit  # Подгрузка во временное хранилище
 
     elements = elements_in_circuit[0]  # Элементы схемы
     a = elements_in_circuit[1]
     b = elements_in_circuit[2]
     c = elements_in_circuit[3]
     y = elements_in_circuit[4]
+
+    if type_of_task == "task_1":
+        temporary_data.append(y)
+    elif type_of_task == "task_2":
+        if temporary_data[0] == 1:
+            temporary_data.append(a)
+        elif temporary_data[0] == 2:
+            temporary_data.append(b)
+        else:
+            temporary_data.append(c)
+    else:
+        print('Error')
 
     # 1 строка
     Label(frame_gates, image=image_of_gates["im_13"]).grid(row=1, column=1)
@@ -778,7 +960,13 @@ def circuit_7():
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=5)
 
     # 2 строка
-    choice_from_0_1(a, 2, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 1:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=2, column=0)
+        temporary_index.append(2)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(a, 2, 0)
+
     Label(frame_gates, image=image_of_gates["im_9"]).grid(row=2, column=1)
     choice_from_gates_1(elements[1], 2, 2)
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=2, column=3)
@@ -793,23 +981,34 @@ def circuit_7():
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=3, column=7)
     choice_from_gates_2(elements[5], 3, 8)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=9)
-    #choice_from_0_1(y, 3, 10)
     if type_of_task == "task_1":
         Label(frame_gates, image=image_of_gates["im_y"]).grid(row=3, column=10)
+        temporary_index.append(3)
+        temporary_index.append(10)
     else:
         choice_from_0_1(y, 3, 10)
-    temporary_index.append(3)
-    temporary_index.append(10)
 
     # 4 строка
-    choice_from_0_1(b, 4, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 2:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=4, column=0)
+        temporary_index.append(4)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(b, 4, 0)
+
     Label(frame_gates, image=image_of_gates["im_4"]).grid(row=4, column=1)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=2)
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=4, column=3)
     Label(frame_gates, image=image_of_gates["im_11"]).grid(row=4, column=7)
 
     # 5 строка
-    choice_from_0_1(c, 5, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 3:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=5, column=0)
+        temporary_index.append(5)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(c, 5, 0)
+
     Label(frame_gates, image=image_of_gates["im_6"]).grid(row=5, column=1)
     choice_from_gates_2(elements[4], 5, 2)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=5, column=3)
@@ -824,7 +1023,6 @@ def circuit_8():
 
     elements_in_circuit = pattern_8()
     global temporary_data
-    temporary_data = elements_in_circuit  # Подгрузка во временное хранилище
 
     elements = elements_in_circuit[0]  # Элементы схемы
     a = elements_in_circuit[1]
@@ -832,13 +1030,31 @@ def circuit_8():
     c = elements_in_circuit[3]
     y = elements_in_circuit[4]
 
+    if type_of_task == "task_1":
+        temporary_data.append(y)
+    elif type_of_task == "task_2":
+        if temporary_data[0] == 1:
+            temporary_data.append(a)
+        elif temporary_data[0] == 2:
+            temporary_data.append(b)
+        else:
+            temporary_data.append(c)
+    else:
+        print('Error')
+
     # 1 строка
     Label(frame_gates, image=image_of_gates["im_13"]).grid(row=1, column=1)
     choice_from_gates_1(elements[0], 1, 2)
     Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=3)
 
     # 2 строка
-    choice_from_0_1(a, 2, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 1:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=2, column=0)
+        temporary_index.append(2)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(a, 2, 0)
+
     Label(frame_gates, image=image_of_gates["im_10"]).grid(row=2, column=1)
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=3)
     choice_from_gates_2(elements[3], 2, 4)
@@ -851,16 +1067,21 @@ def circuit_8():
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=3, column=5)
     choice_from_gates_2(elements[5], 3, 6)
     Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=7)
-    #choice_from_0_1(y, 3, 8)
     if type_of_task == "task_1":
         Label(frame_gates, image=image_of_gates["im_y"]).grid(row=3, column=8)
+        temporary_index.append(3)
+        temporary_index.append(8)
     else:
         choice_from_0_1(y, 3, 8)
-    temporary_index.append(3)
-    temporary_index.append(8)
 
     # 4 строка
-    choice_from_0_1(b, 4, 0)
+    if type_of_task == "task_2" and temporary_data[0] == 2:
+        Label(frame_gates, image=image_of_gates["im_question"]).grid(row=4, column=0)
+        temporary_index.append(4)
+        temporary_index.append(0)
+    else:
+        choice_from_0_1(b, 4, 0)
+
     Label(frame_gates, image=image_of_gates["im_10"]).grid(row=4, column=1)
     Label(frame_gates, image=image_of_gates["im_3"]).grid(row=4, column=3)
     choice_from_gates_2(elements[4], 4, 4)
@@ -870,27 +1091,6 @@ def circuit_8():
     Label(frame_gates, image=image_of_gates["im_12"]).grid(row=5, column=1)
     choice_from_gates_1(elements[2], 5, 2)
     Label(frame_gates, image=image_of_gates["im_5"]).grid(row=5, column=3)
-
-
-def change_of_style_ansi():
-
-    global style
-    style = "ansi"
-    #generate_and_output()
-
-
-def change_of_style_iec():
-
-    global style
-    style = "iec"
-    #generate_and_output()
-
-
-def change_of_style_log():
-
-    global style
-    style = "log"
-    #generate_and_output()
 
 
 def generate_and_output():
@@ -920,6 +1120,9 @@ def generate_and_output():
 
 def task_1():
     """ Задание, где пользователю не известен вывод при всех остальных известных значениях """
+    global type_of_task
+    type_of_task = "task_1"
+
     for widget in frame_gates.winfo_children():
         widget.destroy()
     for widget in frame_task.winfo_children():
@@ -930,13 +1133,9 @@ def task_1():
     temporary_data = []
     temporary_index = []
 
-    #for widget in frame_task.grid_slaves():
-        #widget.destroy()
-
     Label(frame_task,
           text='Какой логический сигнал появится на выходе схемы после подачи заданных вдохящих значений?',
           font="Arial 15").grid(row=0, column=0, sticky="sw", padx=20, pady=20)
-
 
     pattern = random.randint(1, 8)
     if pattern == 1:
@@ -955,8 +1154,7 @@ def task_1():
         circuit_7()
     else:
         circuit_8()
-
-    #circuit_8()
+    #circuit_2()
 
     button = Button(frame_task, text="True", font="Arial 15", command=answer_user_true, width=8)  # relief="flat" для более стильного дизайна
     button.grid(column=0, row=1, sticky="ws", padx=20, pady=10)
@@ -986,7 +1184,11 @@ def answer_user(answer):
         Label(frame_task,
               text='Ответ неверный', font="Arial 15").grid(row=0, column=0, sticky="nw", padx=20, pady=20)
 
-    button = Button(frame_task, text="Следующее задание", font="Arial 15", command=task_1)
+    button = ''  # Без изначального инициализирования ругается
+    if type_of_task == "task_1":
+        button = Button(frame_task, text="Следующее задание", font="Arial 15", command=task_1)
+    elif type_of_task == "task_2":
+        button = Button(frame_task, text="Следующее задание", font="Arial 15", command=task_2)
     button.grid(column=0, row=1, sticky="nw", padx=20, pady=10)
 
     if temporary_data[-1]:
@@ -995,14 +1197,61 @@ def answer_user(answer):
         Label(frame_gates, image=image_of_gates["im_false"]).grid(row=temporary_index[0], column=temporary_index[1])
 
 
+def task_2():
+    """ Задание, где пользователю не известен один сигнал на входе при всех остальных известных значениях """
+    global type_of_task
+    type_of_task = "task_2"
+
+    for widget in frame_gates.winfo_children():
+        widget.destroy()
+    for widget in frame_task.winfo_children():
+        widget.destroy()
+
+    global temporary_data
+    global temporary_index
+    temporary_data = []
+    temporary_index = []
+
+    Label(frame_task,
+          text='При каком значении неизвестного сигнала на входе данная схема будеть верной?',
+          font="Arial 15").grid(row=0, column=0, sticky="sw", padx=20, pady=20)
+
+    inter_var = random.randint(1, 3)
+    temporary_data.append(inter_var)
+
+    pattern = random.randint(1, 8)
+    if pattern == 1:
+        circuit_1()
+    elif pattern == 2:
+        circuit_2()
+    elif pattern == 3:
+        circuit_3()
+    elif pattern == 4:
+        circuit_4()
+    elif pattern == 5:
+        circuit_5()
+    elif pattern == 6:
+        circuit_6()
+    elif pattern == 7:
+        circuit_7()
+    else:
+        circuit_8()
+    #circuit_8()
+
+    button = Button(frame_task, text="True", font="Arial 15", command=answer_user_true, width=8)  # relief="flat" для более стильного дизайна
+    button.grid(column=0, row=1, sticky="ws", padx=20, pady=10)
+    button = Button(frame_task, text="False", font="Arial 15", command=answer_user_false, width=8)
+    button.grid(column=0, row=2, sticky="sw", padx=20, pady=10)
+
+
 def spawn_buttons():
-    #button = Button(frame_button, text="Новая схема", command=generate_and_output, font="Arial 10", width=11)
-    #button.grid(column=1, row=0, padx=1)
     button = Button(frame_button, text="Задание 1", command=task_1, font="Arial 10", width=9)
     button.grid(column=1, row=0, padx=1)
+    button = Button(frame_button, text="Задание 2", command=task_2, font="Arial 10", width=9)
+    button.grid(column=2, row=0, padx=1)
 
 
-""" Меню """
+# Меню
 def swap_iec():
     global style
     style = "iec"
@@ -1030,5 +1279,4 @@ notation_menu.add_command(label="Выбрано ANSI")
 
 
 spawn_buttons()
-#generate_and_output()
 root.mainloop()
