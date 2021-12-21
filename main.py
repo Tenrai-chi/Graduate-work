@@ -29,75 +29,95 @@ notation_menu = Menu(main_menu, tearoff=0)
 # Создание фреймов
 frame_button = Frame(root)  # Фрейм с кнопками
 frame_button.grid(column=0, row=0, sticky="nw", columnspan=2)
+
 frame_gates = Frame(root)  # Фрейм с схемой relief=RIDGE, borderwidth=10, width=700, # height=660
-frame_gates.grid(column=1, row=1, sticky="nw", padx=20, pady=20)
-frame_task = Frame(root)  # Фрейм с заданием
+frame_gates.grid(column=1, row=1, sticky="w", padx=20, pady=20)
+
+frame_task = Frame(root)  # Фрейм с заданием   relief=RIDGE, borderwidth=2
 frame_task.grid(column=1, row=2, sticky="sw")
-frame_empty = Frame(root, width=50, height=850)  # Пустой фрейм, чтобы фрейм с заданием не скакал по экрану
+
+frame_empty = Frame(root, width=50, height=900)  # Пустой фрейм, чтобы фрейм с заданием не скакал по экрану
 frame_empty.grid(column=0, row=1, rowspan=2, sticky="w")
+
+frame_reference = Frame(root, width=500, height=700)  # Фрейм с справка   relief=RIDGE, borderwidth=2
+frame_reference.grid(column=2, row=1, rowspan=2, sticky="ne")
+#frame_reference.grid_forget()
 
 # Подгрузка и преобразование изображений в словарь
 image_of_gates = {
-    "im_true": ImageTk.PhotoImage(Image.open('image/input/true.png')),
-    "im_false": ImageTk.PhotoImage(Image.open('image/input/false.png')),
-    "im_question": ImageTk.PhotoImage(Image.open('image/input/qest.png')),
-    "im_a": ImageTk.PhotoImage(Image.open('image/input/a.png')),
-    "im_b": ImageTk.PhotoImage(Image.open('image/input/b.png')),
-    "im_c": ImageTk.PhotoImage(Image.open('image/input/c.png')),
-    "im_y": ImageTk.PhotoImage(Image.open('image/input/y.png')),
-    "im_1": ImageTk.PhotoImage(Image.open('image/line/1.png')),
-    "im_2": ImageTk.PhotoImage(Image.open('image/line/2.png')),
-    "im_3": ImageTk.PhotoImage(Image.open('image/line/3.png')),
-    "im_4": ImageTk.PhotoImage(Image.open('image/line/4.png')),
-    "im_5": ImageTk.PhotoImage(Image.open('image/line/5.png')),
-    "im_6": ImageTk.PhotoImage(Image.open('image/line/6.png')),
-    "im_7": ImageTk.PhotoImage(Image.open('image/line/7.png')),
-    "im_8": ImageTk.PhotoImage(Image.open('image/line/8.png')),
-    "im_9": ImageTk.PhotoImage(Image.open('image/line/9.png')),
-    "im_10": ImageTk.PhotoImage(Image.open('image/line/10.png')),
-    "im_11": ImageTk.PhotoImage(Image.open('image/line/11.png')),
-    "im_12": ImageTk.PhotoImage(Image.open('image/line/12.png')),
-    "im_13": ImageTk.PhotoImage(Image.open('image/line/13.png')),
-    "im_14": ImageTk.PhotoImage(Image.open('image/line/14.png'))
+    "true": ImageTk.PhotoImage(Image.open('image/input/true.png')),
+    "false": ImageTk.PhotoImage(Image.open('image/input/false.png')),
+    "question": ImageTk.PhotoImage(Image.open('image/input/qest.png')),
+    "a": ImageTk.PhotoImage(Image.open('image/input/a.png')),
+    "b": ImageTk.PhotoImage(Image.open('image/input/b.png')),
+    "c": ImageTk.PhotoImage(Image.open('image/input/c.png')),
+    "y": ImageTk.PhotoImage(Image.open('image/input/y.png')),
+    "1": ImageTk.PhotoImage(Image.open('image/line/1.png')),
+    "2": ImageTk.PhotoImage(Image.open('image/line/2.png')),
+    "3": ImageTk.PhotoImage(Image.open('image/line/3.png')),
+    "4": ImageTk.PhotoImage(Image.open('image/line/4.png')),
+    "5": ImageTk.PhotoImage(Image.open('image/line/5.png')),
+    "6": ImageTk.PhotoImage(Image.open('image/line/6.png')),
+    "7": ImageTk.PhotoImage(Image.open('image/line/7.png')),
+    "8": ImageTk.PhotoImage(Image.open('image/line/8.png')),
+    "9": ImageTk.PhotoImage(Image.open('image/line/9.png')),
+    "10": ImageTk.PhotoImage(Image.open('image/line/10.png')),
+    "11": ImageTk.PhotoImage(Image.open('image/line/11.png')),
+    "12": ImageTk.PhotoImage(Image.open('image/line/12.png')),
+    "13": ImageTk.PhotoImage(Image.open('image/line/13.png')),
+    "14": ImageTk.PhotoImage(Image.open('image/line/14.png'))
 }
 
 #Запись картинок в словари стилей
 gates_styles = {
     "ansi": {  # ANSI
-        "im_not": ImageTk.PhotoImage(Image.open('image/ansi/not.png')),
-        "im_buf": ImageTk.PhotoImage(Image.open('image/ansi/buf.png')),
-        "im_and": ImageTk.PhotoImage(Image.open('image/ansi/and.png')),
-        "im_nand": ImageTk.PhotoImage(Image.open('image/ansi/nand.png')),
-        "im_nor": ImageTk.PhotoImage(Image.open('image/ansi/nor.png')),
-        "im_xnor": ImageTk.PhotoImage(Image.open('image/ansi/xnor.png')),
-        "im_xor": ImageTk.PhotoImage(Image.open('image/ansi/xor.png')),
-        "im_or": ImageTk.PhotoImage(Image.open('image/ansi/or.png'))
+        "not": ImageTk.PhotoImage(Image.open('image/ansi/not.png')),
+        "buf": ImageTk.PhotoImage(Image.open('image/ansi/buf.png')),
+        "and": ImageTk.PhotoImage(Image.open('image/ansi/and.png')),
+        "nand": ImageTk.PhotoImage(Image.open('image/ansi/nand.png')),
+        "nor": ImageTk.PhotoImage(Image.open('image/ansi/nor.png')),
+        "xnor": ImageTk.PhotoImage(Image.open('image/ansi/xnor.png')),
+        "xor": ImageTk.PhotoImage(Image.open('image/ansi/xor.png')),
+        "or": ImageTk.PhotoImage(Image.open('image/ansi/or.png'))
     },
     "iec": {  # ГОСТ
-        "im_not": ImageTk.PhotoImage(Image.open('image/iec/not.png')),
-        "im_buf": ImageTk.PhotoImage(Image.open('image/iec/buf.png')),
-        "im_and": ImageTk.PhotoImage(Image.open('image/iec/and.png')),
-        "im_nand": ImageTk.PhotoImage(Image.open('image/iec/nand.png')),
-        "im_nor": ImageTk.PhotoImage(Image.open('image/iec/nor.png')),
-        "im_xnor": ImageTk.PhotoImage(Image.open('image/iec/xnor.png')),
-        "im_xor": ImageTk.PhotoImage(Image.open('image/iec/xor.png')),
-        "im_or": ImageTk.PhotoImage(Image.open('image/iec/or.png'))
+        "not": ImageTk.PhotoImage(Image.open('image/iec/not.png')),
+        "buf": ImageTk.PhotoImage(Image.open('image/iec/buf.png')),
+        "and": ImageTk.PhotoImage(Image.open('image/iec/and.png')),
+        "nand": ImageTk.PhotoImage(Image.open('image/iec/nand.png')),
+        "nor": ImageTk.PhotoImage(Image.open('image/iec/nor.png')),
+        "xnor": ImageTk.PhotoImage(Image.open('image/iec/xnor.png')),
+        "xor": ImageTk.PhotoImage(Image.open('image/iec/xor.png')),
+        "or": ImageTk.PhotoImage(Image.open('image/iec/or.png'))
     },
     "log": {  # Логические обозначения
-        "im_not": ImageTk.PhotoImage(Image.open('image/letter/not.png')),
-        "im_buf": ImageTk.PhotoImage(Image.open('image/letter/buf.png')),
-        "im_and": ImageTk.PhotoImage(Image.open('image/letter/and.png')),
-        "im_nand": ImageTk.PhotoImage(Image.open('image/letter/nand.png')),
-        "im_nor": ImageTk.PhotoImage(Image.open('image/letter/nor.png')),
-        "im_xnor": ImageTk.PhotoImage(Image.open('image/letter/xnor.png')),
-        "im_xor": ImageTk.PhotoImage(Image.open('image/letter/xor.png')),
-        "im_or": ImageTk.PhotoImage(Image.open('image/letter/or.png'))
+        "not": ImageTk.PhotoImage(Image.open('image/letter/not.png')),
+        "buf": ImageTk.PhotoImage(Image.open('image/letter/buf.png')),
+        "and": ImageTk.PhotoImage(Image.open('image/letter/and.png')),
+        "nand": ImageTk.PhotoImage(Image.open('image/letter/nand.png')),
+        "nor": ImageTk.PhotoImage(Image.open('image/letter/nor.png')),
+        "xnor": ImageTk.PhotoImage(Image.open('image/letter/xnor.png')),
+        "xor": ImageTk.PhotoImage(Image.open('image/letter/xor.png')),
+        "or": ImageTk.PhotoImage(Image.open('image/letter/or.png'))
     }
 }
+
+truth_table = {
+        "not": ImageTk.PhotoImage(Image.open('information/image/not.png')),
+        "buf": ImageTk.PhotoImage(Image.open('information/image/buf.png')),
+        "and": ImageTk.PhotoImage(Image.open('information/image/and.png')),
+        "nand": ImageTk.PhotoImage(Image.open('information/image/nand.png')),
+        "nor": ImageTk.PhotoImage(Image.open('information/image/nor.png')),
+        "xnor": ImageTk.PhotoImage(Image.open('information/image/xnor.png')),
+        "xor": ImageTk.PhotoImage(Image.open('information/image/xor.png')),
+        "or": ImageTk.PhotoImage(Image.open('information/image/or.png'))
+}
+
 
 style = "ansi"  # Метка используемого вида обозначений
 temporary_data = []  # Хранилище временных данных: [str], bool*4
 temporary_index = []  # Хранение координат
+temporary_elements_and_index = []  # Хранит вентили и их координаты
 type_of_task = "task_1"  # Метка задания
 
 
@@ -570,43 +590,110 @@ def solution(operation, enter_a, enter_b=True, enter_c=True) -> bool:
         return lg.log_NOR3(enter_a, enter_b, enter_c)
 
 
-def choice_from_gates_1(element: str, index_1: int, index_2: int):
-    """ Определяет какой элемент отрисовывать при 1 входном сигнале """
+def reference_call(logic_gate: str, name_reference: str):
+    for widget in frame_reference.winfo_children():
+        widget.destroy()
 
-    if element == 'buf':
-        Label(frame_gates, image=gates_styles[style]["im_buf"]).grid(row=index_1, column=index_2)
-    elif element == 'not':
-        Label(frame_gates, image=gates_styles[style]["im_not"]).grid(row=index_1, column=index_2)
-    else:
-        print('Error in choice_from_gates_1')
+    frame_reference.config(relief=RIDGE, borderwidth=2)
+    Label(frame_reference, text=name_reference, font="Arial 15").grid(column=0, row=0, columnspan=2, sticky="we")
+    Label(frame_reference, text="Обозначения", font="Arial 13").grid(column=0, row=1)
+    Label(frame_reference, text="Таблица истинности:", font="Arial 13", padx=7, pady=5).grid(column=1, row=1)
+
+    Label(frame_reference, image=gates_styles["iec"][logic_gate], padx=7, pady=5).grid(column=0, row=2)
+    Label(frame_reference, image=gates_styles["ansi"][logic_gate], padx=7, pady=5).grid(column=0, row=3)
+    Label(frame_reference, image=gates_styles["log"][logic_gate], padx=7, pady=5).grid(column=0, row=4)
+    Label(frame_reference, image=truth_table[logic_gate], padx=7, pady=5).grid(column=1, row=2)
 
 
-def choice_from_gates_2(element: str, index_1: int, index_2: int):
-    """ Определяет какой элемент отрисовывать при двух входных сигналах """
+def reference_buf(event):
+    """ Справка buf """
+    reference_call(logic_gate="buf", name_reference="БУФФЕР")
 
-    if element == 'and':
-        Label(frame_gates, image=gates_styles[style]["im_and"]).grid(row=index_1, column=index_2)
-    elif element == 'or':
-        Label(frame_gates, image=gates_styles[style]["im_or"]).grid(row=index_1, column=index_2)
-    elif element == 'xor':
-        Label(frame_gates, image=gates_styles[style]["im_xor"]).grid(row=index_1, column=index_2)
-    elif element == 'nand':
-        Label(frame_gates, image=gates_styles[style]["im_nand"]).grid(row=index_1, column=index_2)
-    elif element == 'nor':
-        Label(frame_gates, image=gates_styles[style]["im_nor"]).grid(row=index_1, column=index_2)
-    elif element == 'xnor':
-        Label(frame_gates, image=gates_styles[style]["im_nor"]).grid(row=index_1, column=index_2)
-    else:
-        print('Error in choice_from_gates_2')
+
+def reference_not(event):
+    """ Справка not """
+    reference_call(logic_gate="not", name_reference="НЕ")
+
+
+def reference_and(event):
+    """ Справка and """
+
+    reference_call(logic_gate="and", name_reference="И")
+
+
+def reference_or(event):
+    """ Справка or """
+
+    reference_call(logic_gate="or", name_reference="ИЛИ")
+
+
+def reference_xor(event):
+    """ Справка xor """
+
+    reference_call(logic_gate="xor", name_reference="Исключающее ИЛИ")
+
+
+def reference_nand(event):
+    """ Справка nand """
+
+    reference_call(logic_gate="nand", name_reference="И-НЕ")
+
+
+def reference_nor(event):
+    """ Справка nor """
+
+    reference_call(logic_gate="nor", name_reference="ИЛИ-НЕ")
+
+
+def reference_xnor(event):
+    """ Справка xnor """
+
+    reference_call(logic_gate="xnor", name_reference="Исключающее ИЛИ-НЕ")
+
+
+def choice_from_gates(element: str, index_1: int, index_2: int, call_type=1):
+    """ Определяет какой элемент отрисовывать """
+
+    global temporary_elements_and_index
+    elements = {
+        'buf': "buf",
+        'not': "not",
+        'and': "and",
+        'or': "or",
+        'xor': "xor",
+        'nand': "nand",
+        'nor': "nor",
+        'xnor': "xnor"
+    }
+
+    commands = {
+        'buf': reference_buf,
+        'not': reference_not,
+        'and': reference_and,
+        'or': reference_or,
+        'xor': reference_xor,
+        'nand': reference_nand,
+        'nor': reference_nor,
+        'xnor': reference_xnor
+    }
+
+    if call_type == 1:
+        temporary_elements_and_index.append(element)
+        temporary_elements_and_index.append(index_1)
+        temporary_elements_and_index.append(index_2)
+
+    lbl = Label(frame_gates, image=gates_styles[style][elements[element]])
+    lbl.grid(row=index_1, column=index_2)
+    lbl.bind("<Button-1>", commands[element])
 
 
 def choice_from_0_1(vari: bool, index_1: int, index_2: int):
     """ Определяет какой элемент отрисовывать на входах и выходе """
 
     if vari:
-        Label(frame_gates, image=image_of_gates["im_true"]).grid(row=index_1, column=index_2)
+        Label(frame_gates, image=image_of_gates["true"]).grid(row=index_1, column=index_2)
     elif not vari:
-        Label(frame_gates, image=image_of_gates["im_false"]).grid(row=index_1, column=index_2)
+        Label(frame_gates, image=image_of_gates["false"]).grid(row=index_1, column=index_2)
     else:
         print('Error in choice_from_0_1')
 
@@ -631,7 +718,7 @@ def choice_from_signal_image(index_1: int, index_2: int, signal: bool, this_lett
     """ Отрисовка входящих или выходящего сигнала в заданиях """
 
     if type_of_task == "task_1" and this_letter == 4:
-        Label(frame_gates, image=image_of_gates["im_y"]).grid(row=index_1, column=index_2)
+        Label(frame_gates, image=image_of_gates["y"]).grid(row=index_1, column=index_2)
         temporary_index.append(index_1)
         temporary_index.append(index_2)
     elif type_of_task == "task_1" and this_letter != 4:
@@ -639,7 +726,7 @@ def choice_from_signal_image(index_1: int, index_2: int, signal: bool, this_lett
 
     elif type_of_task == "task_2":
         if temporary_data[0] == this_letter:
-            Label(frame_gates, image=image_of_gates["im_question"]).grid(row=index_1, column=index_2)
+            Label(frame_gates, image=image_of_gates["question"]).grid(row=index_1, column=index_2)
             temporary_index.append(index_1)
             temporary_index.append(index_2)
         else:
@@ -662,41 +749,41 @@ def circuit_1():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=1)
-    choice_from_gates_1(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=3)
 
     # 2 строка
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=3)
-    choice_from_gates_2(elements[2], 1, 4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=5)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=3)
+    choice_from_gates(elements[2], 1, 4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=5)
 
     # 3 строка
     choice_from_signal_image(2, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_4"]).grid(row=2, column=1)
-    choice_from_gates_1(elements[1], 2, 2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=3)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=5)
-    choice_from_gates_2(elements[4], 2, 6)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=7)
+    Label(frame_gates, image=image_of_gates["4"]).grid(row=2, column=1)
+    choice_from_gates(elements[1], 2, 2)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=3)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=5)
+    choice_from_gates(elements[4], 2, 6)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=7)
     choice_from_signal_image(2, 8, y, 4)
 
     # 4 строка
-    Label(frame_gates, image=image_of_gates["im_12"]).grid(row=3, column=1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=2)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=3, column=3)
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=3, column=5)
+    Label(frame_gates, image=image_of_gates["12"]).grid(row=3, column=1)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=2)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=3, column=3)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=3, column=5)
 
     # 5 строка
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=4, column=3)
-    choice_from_gates_2(elements[3], 4, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=4, column=5)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=4, column=3)
+    choice_from_gates(elements[3], 4, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=4, column=5)
 
     # 6 строка
     choice_from_signal_image(5, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=5, column=1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=5, column=2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=5, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=5, column=1)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=5, column=2)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=5, column=3)
 
 
 def circuit_2():
@@ -714,33 +801,33 @@ def circuit_2():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=1)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=1)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=2)
 
     # 2 строка
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=2)
-    choice_from_gates_2(elements[0], 1, 3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=4)
-    choice_from_gates_1(elements[2], 1, 5)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=6)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=2)
+    choice_from_gates(elements[0], 1, 3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=1, column=4)
+    choice_from_gates(elements[2], 1, 5)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=6)
 
     # 3 строка
     choice_from_signal_image(2, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_4"]).grid(row=2, column=1)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=2)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=6)
-    choice_from_gates_2(elements[3], 2, 7)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=8)
+    Label(frame_gates, image=image_of_gates["4"]).grid(row=2, column=1)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=2)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=6)
+    choice_from_gates(elements[3], 2, 7)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=8)
     choice_from_signal_image(2, 9, y, 4)
 
     # 4 строка
     choice_from_signal_image(3, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_6"]).grid(row=3, column=1)
-    choice_from_gates_2(elements[3], 3, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=4)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=5)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=6)
+    Label(frame_gates, image=image_of_gates["6"]).grid(row=3, column=1)
+    choice_from_gates(elements[3], 3, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=4)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=5)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=3, column=6)
 
 
 def circuit_3():
@@ -758,27 +845,27 @@ def circuit_3():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_7"]).grid(row=0, column=1)
-    choice_from_gates_2(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=3)
-    choice_from_gates_1(elements[2], 0, 4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=5)
+    Label(frame_gates, image=image_of_gates["7"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=3)
+    choice_from_gates(elements[2], 0, 4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=5)
 
     # 2 строка
     choice_from_signal_image(1, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=1, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=5)
-    choice_from_gates_2(elements[4], 1, 6)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=7)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=1, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=5)
+    choice_from_gates(elements[4], 1, 6)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=1, column=7)
     choice_from_signal_image(1, 8, y, 4)
 
     # 3 строка
     choice_from_signal_image(2, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_6"]).grid(row=2, column=1)
-    choice_from_gates_2(elements[1], 2, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=3)
-    choice_from_gates_1(elements[3], 2, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=5)
+    Label(frame_gates, image=image_of_gates["6"]).grid(row=2, column=1)
+    choice_from_gates(elements[1], 2, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=3)
+    choice_from_gates(elements[3], 2, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=5)
 
 
 def circuit_4():
@@ -796,38 +883,38 @@ def circuit_4():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_7"]).grid(row=0, column=1)
-    choice_from_gates_2(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=5)
+    Label(frame_gates, image=image_of_gates["7"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=5)
 
     # 2 строка
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=1, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=5)
-    choice_from_gates_2(elements[0], 1, 6)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=7)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=1, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=5)
+    choice_from_gates(elements[0], 1, 6)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=7)
 
     # 3 строка
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=2, column=1)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=2, column=1)
     choice_from_signal_image(2, 2, c, 3)
-    Label(frame_gates, image=image_of_gates["im_7"]).grid(row=2, column=3)
-    choice_from_gates_2(elements[1], 2, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=5)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=7)
-    choice_from_gates_2(elements[4], 2, 8)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=9)
+    Label(frame_gates, image=image_of_gates["7"]).grid(row=2, column=3)
+    choice_from_gates(elements[1], 2, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=5)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=7)
+    choice_from_gates(elements[4], 2, 8)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=9)
     choice_from_signal_image(2, 10, y, 4)
 
     # 4 строка
     choice_from_signal_image(3, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_9"]).grid(row=3, column=1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=2)
-    Label(frame_gates, image=image_of_gates["im_9"]).grid(row=3, column=3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=4)
-    choice_from_gates_1(elements[3], 3, 5)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=6)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=7)
+    Label(frame_gates, image=image_of_gates["9"]).grid(row=3, column=1)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=2)
+    Label(frame_gates, image=image_of_gates["9"]).grid(row=3, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=4)
+    choice_from_gates(elements[3], 3, 5)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=6)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=3, column=7)
 
 
 def circuit_5():
@@ -845,29 +932,29 @@ def circuit_5():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_7"]).grid(row=0, column=1)
-    choice_from_gates_2(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=3)
-    choice_from_gates_1(elements[2], 0, 4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=5)
+    Label(frame_gates, image=image_of_gates["7"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=3)
+    choice_from_gates(elements[2], 0, 4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=5)
 
     # 2 строка
     choice_from_signal_image(1, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=1, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=5)
-    choice_from_gates_2(elements[3], 1, 6)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=7)
-    choice_from_gates_1(elements[4], 1, 8)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=9)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=1, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=5)
+    choice_from_gates(elements[3], 1, 6)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=1, column=7)
+    choice_from_gates(elements[4], 1, 8)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=1, column=9)
     choice_from_signal_image(1, 10, y, 4)
 
     # 3 строка
     choice_from_signal_image(2, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_6"]).grid(row=2, column=1)
-    choice_from_gates_2(elements[1], 2, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=5)
+    Label(frame_gates, image=image_of_gates["6"]).grid(row=2, column=1)
+    choice_from_gates(elements[1], 2, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=5)
 
 
 def circuit_6():
@@ -885,35 +972,35 @@ def circuit_6():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_4"]).grid(row=0, column=1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=5)
+    Label(frame_gates, image=image_of_gates["4"]).grid(row=0, column=1)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=5)
 
     # 2 строка
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=1)
-    choice_from_gates_2(elements[0], 1, 2)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=3)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=5)
-    choice_from_gates_2(elements[3], 1, 6)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=7)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=1)
+    choice_from_gates(elements[0], 1, 2)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=3)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=5)
+    choice_from_gates(elements[3], 1, 6)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=1, column=7)
     choice_from_signal_image(1, 8, y, 4)
 
     # 3 строка
     choice_from_0_1(b, 3, 0)
     choice_from_signal_image(2, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=3)
-    choice_from_gates_2(elements[2], 2, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=5)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=3)
+    choice_from_gates(elements[2], 2, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=5)
 
     # 4 строка
     choice_from_0_1(c, 3, 0)
     choice_from_signal_image(3, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=1)
-    choice_from_gates_1(elements[1], 3, 2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=1)
+    choice_from_gates(elements[1], 3, 2)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=3, column=3)
 
 
 def circuit_7():
@@ -930,46 +1017,46 @@ def circuit_7():
     writing_to_temporary_data(a, b, c, y)
 
     # 1 строка
-    Label(frame_gates, image=image_of_gates["im_13"]).grid(row=0, column=1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=2)
-    choice_from_gates_1(elements[0], 0, 3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=5)
+    Label(frame_gates, image=image_of_gates["13"]).grid(row=0, column=1)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=2)
+    choice_from_gates(elements[0], 0, 3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=5)
 
     # 2 строка
     choice_from_signal_image(1, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_9"]).grid(row=1, column=1)
-    choice_from_gates_1(elements[1], 1, 2)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=3)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=5)
-    choice_from_gates_2(elements[3], 1, 6)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=7)
+    Label(frame_gates, image=image_of_gates["9"]).grid(row=1, column=1)
+    choice_from_gates(elements[1], 1, 2)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=3)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=5)
+    choice_from_gates(elements[3], 1, 6)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=7)
 
     # 3 строка
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=3)
-    choice_from_gates_2(elements[2], 2, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=5)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=7)
-    choice_from_gates_2(elements[5], 2, 8)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=9)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=3)
+    choice_from_gates(elements[2], 2, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=5)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=7)
+    choice_from_gates(elements[5], 2, 8)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=9)
     choice_from_signal_image(2, 10, y, 4)
 
     # 4 строка
     choice_from_signal_image(3, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_4"]).grid(row=3, column=1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=3)
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=3, column=7)
+    Label(frame_gates, image=image_of_gates["4"]).grid(row=3, column=1)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=2)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=3, column=3)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=3, column=7)
 
     # 5 строка
     choice_from_signal_image(4, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_6"]).grid(row=4, column=1)
-    choice_from_gates_2(elements[4], 4, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=4)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=5)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=6)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=4, column=7)
+    Label(frame_gates, image=image_of_gates["6"]).grid(row=4, column=1)
+    choice_from_gates(elements[4], 4, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=4, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=4, column=4)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=4, column=5)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=4, column=6)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=4, column=7)
 
 
 def circuit_8():
@@ -988,33 +1075,33 @@ def circuit_8():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_7"]).grid(row=0, column=1)
-    choice_from_gates_2(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=3)
-    choice_from_gates_1(elements[2], 0, 4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=5)
+    Label(frame_gates, image=image_of_gates["7"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=3)
+    choice_from_gates(elements[2], 0, 4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=5)
 
     # 2 строка
     choice_from_signal_image(1, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_14"]).grid(row=1, column=1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=2)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=3)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=5)
-    choice_from_gates_2(elements[4], 1, 6)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=7)
+    Label(frame_gates, image=image_of_gates["14"]).grid(row=1, column=1)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=1, column=2)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=3)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=5)
+    choice_from_gates(elements[4], 1, 6)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=1, column=7)
     choice_from_signal_image(1, 8, y, 4)
 
     # 3 строка
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=2, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=3)
-    choice_from_gates_2(elements[3], 2, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=5)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=2, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=3)
+    choice_from_gates(elements[3], 2, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=5)
 
     # 4 строка
     choice_from_signal_image(3, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_6"]).grid(row=3, column=1)
-    choice_from_gates_2(elements[1], 3, 2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=3)
+    Label(frame_gates, image=image_of_gates["6"]).grid(row=3, column=1)
+    choice_from_gates(elements[1], 3, 2)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=3, column=3)
 
 
 def circuit_9():
@@ -1032,37 +1119,37 @@ def circuit_9():
     writing_to_temporary_data(a, b, c, y)
 
     # 1 строка
-    Label(frame_gates, image=image_of_gates["im_13"]).grid(row=0, column=1)
-    choice_from_gates_1(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=3)
+    Label(frame_gates, image=image_of_gates["13"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=3)
 
     # 2 строка
     choice_from_signal_image(1, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=1, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=3)
-    choice_from_gates_2(elements[2], 1, 4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=5)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=1, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=3)
+    choice_from_gates(elements[2], 1, 4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=5)
 
     # 3 строка
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=1)
-    choice_from_gates_2(elements[1], 2, 2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=3)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=5)
-    choice_from_gates_2(elements[5], 2, 6)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=7)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=1)
+    choice_from_gates(elements[1], 2, 2)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=3)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=5)
+    choice_from_gates(elements[5], 2, 6)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=7)
     choice_from_signal_image(2, 8, y, 4)
     choice_from_signal_image(3, 0, b, 2)
 
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=3, column=1)
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=3, column=5)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=3, column=1)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=3, column=5)
 
     # 4 строка
     choice_from_signal_image(4, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_6"]).grid(row=4, column=1)
-    choice_from_gates_2(elements[3], 4, 2)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=3)
-    choice_from_gates_1(elements[4], 4, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=4, column=5)
+    Label(frame_gates, image=image_of_gates["6"]).grid(row=4, column=1)
+    choice_from_gates(elements[3], 4, 2)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=4, column=3)
+    choice_from_gates(elements[4], 4, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=4, column=5)
 
 
 def circuit_10():
@@ -1081,42 +1168,42 @@ def circuit_10():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_7"]).grid(row=0, column=1)
-    choice_from_gates_2(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_4"]).grid(row=0, column=3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=0, column=4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=5)
+    Label(frame_gates, image=image_of_gates["7"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["4"]).grid(row=0, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=0, column=4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=5)
 
     # 2 строка
     choice_from_signal_image(1, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=1, column=1)
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=1, column=3)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=5)
-    choice_from_gates_2(elements[2], 1, 6)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=7)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=1, column=1)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=1, column=3)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=5)
+    choice_from_gates(elements[2], 1, 6)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=7)
 
     # 3 строка
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=3)
-    choice_from_gates_2(elements[1], 2, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=5)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=7)
-    choice_from_gates_2(elements[4], 2, 8)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=9)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=3)
+    choice_from_gates(elements[1], 2, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=5)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=7)
+    choice_from_gates(elements[4], 2, 8)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=9)
     choice_from_signal_image(2, 10, y, 4)
 
     # 4 строка
     choice_from_signal_image(3, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=1)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=3, column=2)
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=3, column=3)
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=3, column=7)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=1)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=3, column=2)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=3, column=3)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=3, column=7)
 
     # 5 строка
-    Label(frame_gates, image=image_of_gates["im_12"]).grid(row=4, column=3)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=4)
-    choice_from_gates_1(elements[3], 4, 5)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=4, column=6)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=4, column=7)
+    Label(frame_gates, image=image_of_gates["12"]).grid(row=4, column=3)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=4, column=4)
+    choice_from_gates(elements[3], 4, 5)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=4, column=6)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=4, column=7)
 
 
 def circuit_11():
@@ -1135,32 +1222,32 @@ def circuit_11():
 
     # 1 строка
     choice_from_signal_image(0, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_7"]).grid(row=0, column=1)
-    choice_from_gates_2(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_4"]).grid(row=0, column=3)
-    choice_from_gates_1(elements[2], 0, 4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=5)
+    Label(frame_gates, image=image_of_gates["7"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["4"]).grid(row=0, column=3)
+    choice_from_gates(elements[2], 0, 4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=5)
 
     # 2 строка
     choice_from_signal_image(1, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=1, column=1)
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=1, column=3)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=5)
-    choice_from_gates_2(elements[4], 1, 6)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=1, column=7)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=1, column=1)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=1, column=3)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=5)
+    choice_from_gates(elements[4], 1, 6)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=1, column=7)
     choice_from_signal_image(1, 8, y, 4)
 
     # 3 строка
-    Label(frame_gates, image=image_of_gates["im_11"]).grid(row=2, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=3)
-    choice_from_gates_2(elements[3], 2, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=2, column=5)
+    Label(frame_gates, image=image_of_gates["11"]).grid(row=2, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=3)
+    choice_from_gates(elements[3], 2, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=2, column=5)
 
     # 4 строка
     choice_from_signal_image(3, 0, c, 3)
-    Label(frame_gates, image=image_of_gates["im_6"]).grid(row=3, column=1)
-    choice_from_gates_2(elements[1], 3, 2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=3)
+    Label(frame_gates, image=image_of_gates["6"]).grid(row=3, column=1)
+    choice_from_gates(elements[1], 3, 2)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=3, column=3)
 
 
 def circuit_12():
@@ -1188,37 +1275,37 @@ def circuit_12():
         print('Error')
 
     # 1 строка
-    Label(frame_gates, image=image_of_gates["im_13"]).grid(row=0, column=1)
-    choice_from_gates_1(elements[0], 0, 2)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=0, column=3)
+    Label(frame_gates, image=image_of_gates["13"]).grid(row=0, column=1)
+    choice_from_gates(elements[0], 0, 2)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=0, column=3)
 
     # 2 строка
     choice_from_signal_image(1, 0, a, 1)
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=1, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=1, column=3)
-    choice_from_gates_2(elements[3], 1, 4)
-    Label(frame_gates, image=image_of_gates["im_2"]).grid(row=1, column=5)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=1, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=1, column=3)
+    choice_from_gates(elements[3], 1, 4)
+    Label(frame_gates, image=image_of_gates["2"]).grid(row=1, column=5)
 
     # 3 строка
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=1)
-    choice_from_gates_2(elements[1], 2, 2)
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=2, column=3)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=2, column=5)
-    choice_from_gates_2(elements[5], 2, 6)
-    Label(frame_gates, image=image_of_gates["im_1"]).grid(row=2, column=7)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=1)
+    choice_from_gates(elements[1], 2, 2)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=2, column=3)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=2, column=5)
+    choice_from_gates(elements[5], 2, 6)
+    Label(frame_gates, image=image_of_gates["1"]).grid(row=2, column=7)
     choice_from_signal_image(2, 8, y, 4)
 
     # 4 строка
     choice_from_signal_image(3, 0, b, 2)
-    Label(frame_gates, image=image_of_gates["im_10"]).grid(row=3, column=1)
-    Label(frame_gates, image=image_of_gates["im_3"]).grid(row=3, column=3)
-    choice_from_gates_2(elements[4], 3, 4)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=3, column=5)
+    Label(frame_gates, image=image_of_gates["10"]).grid(row=3, column=1)
+    Label(frame_gates, image=image_of_gates["3"]).grid(row=3, column=3)
+    choice_from_gates(elements[4], 3, 4)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=3, column=5)
 
     # 5 строка
-    Label(frame_gates, image=image_of_gates["im_12"]).grid(row=4, column=1)
-    choice_from_gates_1(elements[2], 4, 2)
-    Label(frame_gates, image=image_of_gates["im_5"]).grid(row=4, column=3)
+    Label(frame_gates, image=image_of_gates["12"]).grid(row=4, column=1)
+    choice_from_gates(elements[2], 4, 2)
+    Label(frame_gates, image=image_of_gates["5"]).grid(row=4, column=3)
 
 
 def answer_user_true():
@@ -1252,9 +1339,9 @@ def answer_user(answer: bool):
     button.grid(column=0, row=1, sticky="nw", padx=20, pady=10)
 
     if temporary_data[-1]:
-        Label(frame_gates, image=image_of_gates["im_true"]).grid(row=temporary_index[0], column=temporary_index[1])
+        Label(frame_gates, image=image_of_gates["true"]).grid(row=temporary_index[0], column=temporary_index[1])
     else:
-        Label(frame_gates, image=image_of_gates["im_false"]).grid(row=temporary_index[0], column=temporary_index[1])
+        Label(frame_gates, image=image_of_gates["false"]).grid(row=temporary_index[0], column=temporary_index[1])
 
 
 def task_1():
@@ -1266,11 +1353,16 @@ def task_1():
         widget.destroy()
     for widget in frame_task.winfo_children():
         widget.destroy()
+    for widget in frame_reference.winfo_children():
+        widget.destroy()
+    frame_reference.config(borderwidth=0)
 
     global temporary_data
     global temporary_index
+    global temporary_elements_and_index
     temporary_data = []
     temporary_index = []
+    temporary_elements_and_index = []
 
     Label(frame_task,
           text='Какой логический сигнал появится на выходе схемы после подачи заданных вдохящих значений?',
@@ -1309,11 +1401,16 @@ def task_2():
         widget.destroy()
     for widget in frame_task.winfo_children():
         widget.destroy()
+    for widget in frame_reference.winfo_children():
+        widget.destroy()
+    frame_reference.config(borderwidth=0)
 
     global temporary_data
     global temporary_index
+    global temporary_elements_and_index
     temporary_data = []
     temporary_index = []
+    temporary_elements_and_index = []
 
     Label(frame_task,
           text='При каком значении неизвестного сигнала на входе данная схема будеть верной?',
@@ -1341,9 +1438,9 @@ def task_2():
     #circuit_12()
 
     button = Button(frame_task, text="True", font="Arial 15", command=answer_user_true, width=8)  # relief="flat" для более стильного дизайна
-    button.grid(column=0, row=1, sticky="ws", padx=20, pady=10)
+    button.grid(row=1, column=0, sticky="ws", padx=20, pady=10)
     button = Button(frame_task, text="False", font="Arial 15", command=answer_user_false, width=8)
-    button.grid(column=0, row=2, sticky="sw", padx=20, pady=10)
+    button.grid(row=2, column=0, sticky="sw", padx=20, pady=10)
 
 
 def random_task():
@@ -1356,11 +1453,17 @@ def random_task():
 
 def spawn_buttons():
     button = Button(frame_button, text="Задание 1", command=task_1, font="Arial 10", width=9)
-    button.grid(column=1, row=0, padx=1)
+    button.grid(row=0, column=1, padx=1)
     button = Button(frame_button, text="Задание 2", command=task_2, font="Arial 10", width=9)
-    button.grid(column=2, row=0, padx=1)
-    #button = Button(frame_button, text="Random", command=random_task, font="Arial 10", width=9)
+    button.grid(row=0, column=2, padx=1)
+    #button = Button(frame_button, text="Random", command=size, font="Arial 10", width=9)
     #button.grid(column=3, row=0, padx=1)
+
+
+def redrawing_of_gates():
+    array = temporary_elements_and_index
+    for element in range(0, len(array) - 1, 3):
+        choice_from_gates(element=array[element], index_1=array[element+1], index_2=array[element+2], call_type=2)
 
 
 # Меню
@@ -1370,6 +1473,7 @@ def swap_iec():
     global style
     style = "iec"
     notation_menu.entryconfig(4, label="Выбран IEC")
+    redrawing_of_gates()
 
 
 def swap_ansi():
@@ -1378,6 +1482,7 @@ def swap_ansi():
     global style
     style = "ansi"
     notation_menu.entryconfig(4, label="Выбран ANSI")
+    redrawing_of_gates()
 
 
 def swap_letter():
@@ -1386,6 +1491,7 @@ def swap_letter():
     global style
     style = "log"
     notation_menu.entryconfig(4, label="Выбран Letter")
+    redrawing_of_gates()
 
 
 main_menu.add_cascade(label="Нотация", menu=notation_menu)
@@ -1394,7 +1500,6 @@ notation_menu.add_command(label="ANSI", command=swap_ansi)
 notation_menu.add_command(label="Letter", command=swap_letter)
 notation_menu.add_separator()
 notation_menu.add_command(label="Выбрано ANSI")
-
 
 spawn_buttons()
 root.mainloop()
