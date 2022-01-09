@@ -1313,6 +1313,7 @@ def answer_user_true():
     answer_user(True)
 
 
+
 def answer_user_false():
     """ Вызывает функцию с обработкой ответа с False """
     answer_user(False)
@@ -1494,12 +1495,13 @@ def swap_letter():
     redrawing_of_gates()
 
 
-main_menu.add_cascade(label="Нотация", menu=notation_menu)
-notation_menu.add_command(label="IEC", command=swap_iec)
-notation_menu.add_command(label="ANSI", command=swap_ansi)
-notation_menu.add_command(label="Letter", command=swap_letter)
-notation_menu.add_separator()
-notation_menu.add_command(label="Выбрано ANSI")
+if __name__ == "__main__":
+    main_menu.add_cascade(label="Нотация", menu=notation_menu)
+    notation_menu.add_command(label="ANSI", command=swap_ansi)
+    notation_menu.add_command(label="IEC", command=swap_iec)
+    notation_menu.add_command(label="Letter", command=swap_letter)
+    notation_menu.add_separator()
+    notation_menu.add_command(label="Выбрано ANSI")
 
-spawn_buttons()
-root.mainloop()
+    spawn_buttons()
+    root.mainloop()
