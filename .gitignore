@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 test.py
 interface.py
+truth_table.py

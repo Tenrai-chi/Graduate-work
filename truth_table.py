@@ -117,7 +117,7 @@ def solution() -> list:
         a = matrix[row][0]
         b = matrix[row][1]
         c = matrix[row][2]
-        matrix[row][width-1] = eval(task)
+        #matrix[row][width-1] = eval(task)
     print(task)
 
     return matrix
