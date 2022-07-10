@@ -267,12 +267,10 @@ def pattern_1(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(5):
-        elements.append('?')
+    elements = ['?' for i in range(5)]
 
     if call_type == "generate":
         a = random.choice(true_false)
@@ -345,12 +343,10 @@ def pattern_2(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(4):
-        elements.append('?')
+    elements = ['?' for i in range(4)]
 
     if call_type == "generate":
         a = random.choice(true_false)
@@ -420,12 +416,10 @@ def pattern_3(call_type='generate') -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(5):
-        elements.append('?')
+    elements = ['?' for i in range(5)]
 
     if call_type == "generate":
         a = random.choice(true_false)
@@ -497,12 +491,10 @@ def pattern_4(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(5):
-        elements.append('?')
+    elements = ['?' for i in range(5)]
 
     if call_type == "generate":
 
@@ -576,12 +568,10 @@ def pattern_5(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(5):
-        elements.append('?')
+    elements = ['?' for i in range(5)]
 
     if call_type == "generate":
         a = random.choice(true_false)
@@ -654,12 +644,10 @@ def pattern_6(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(4):
-        elements.append('?')
+    elements = ['?' for i in range(4)]
 
     if call_type == "generate":
         a = random.choice(true_false)
@@ -728,12 +716,10 @@ def pattern_7(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(6):
-        elements.append('?')
+    elements = ['?' for i in range(6)]
 
     if call_type == "generate":
         a = random.choice(true_false)
@@ -810,12 +796,10 @@ def pattern_8(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(5):
-        elements.append('?')
+    elements = ['?' for i in range(5)]
 
     if call_type == "generate":
         a = random.choice(true_false)
@@ -888,12 +872,10 @@ def pattern_9(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(6):
-        elements.append('?')
+    elements = ['?' for i in range(6)]
 
     if call_type == "generate":
 
@@ -971,12 +953,10 @@ def pattern_10(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(5):
-        elements.append('?')
+    elements = ['?' for i in range(5)]
 
     if call_type == "generate":
 
@@ -1050,12 +1030,10 @@ def pattern_11(call_type="generate") -> tuple:
     global elements_of_gate
     global y_in_task_2
 
-    elements = []
     ans_elements = []
     a = b = c = None
 
-    for i in range(5):
-        elements.append('?')
+    elements = ['?' for i in range(5)]
 
     if call_type == "generate":
         a = random.choice(true_false)
@@ -1128,9 +1106,7 @@ def pattern_12() -> tuple:
     b = random.choice(true_false)
     c = random.choice(true_false)
 
-    elements = []
-    for i in range(6):
-        elements.append('?')
+    elements = ['?' for i in range(6)]
 
     elements[0] = random.choice(gates_for_1)
     elements[1] = random.choice(gates_for_2)
