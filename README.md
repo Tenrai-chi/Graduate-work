@@ -11,6 +11,7 @@
       ![image](https://github.com/Tenrai-chi/Graduate-work/assets/79309888/e3ed96c6-0085-4862-b84c-87fb5e22e916)
 ## Нотации 
 Для обозначения логических вентилей тренажер использует нескольно видов нотаций: IEC, ANSI и булевы функции.
+
 ![image](https://github.com/Tenrai-chi/Graduate-work/assets/79309888/ab497f61-b170-4533-b9d6-9ba6a2acc5e5)
 
 ## Три режима
